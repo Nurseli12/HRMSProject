@@ -5,7 +5,10 @@ import kodlama.io.hrmsproject.business.abstracts.JobPositionService;
 import kodlama.io.hrmsproject.core.utilities.result.DataResult;
 import kodlama.io.hrmsproject.core.utilities.result.Result;
 import kodlama.io.hrmsproject.entities.concretes.JobAdvertisement;
+import kodlama.io.hrmsproject.entities.dtos.JobAdvertisementDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +51,10 @@ public class JobAdvertisementsController {
     public DataResult<List<JobAdvertisement>> findAllByEmployer_IdAndStatusTrue(int id){
         return this.jobAdvertisementService.findAllByEmployer_IdAndStatusTrue(id);
     }
-  /*  @GetMapping("/findAllByMaxSalaryBetweenMinSalary")
-    public DataResult<List<JobAdvertisement>> findAllByMaxSalaryBetweenMinSalary(int maxSalary, int minSalary){
-        return this.jobAdvertisementService.findAllByMaxSalaryBetweenMinSalary(maxSalary,minSalary);
+    @GetMapping("/getJobAdvertisementWithEmpDetails")
+    public ResponseEntity<DataResult<List<JobAdvertisementDto>>> getJobAdvertisementWithEmpDetails(){
+        return new ResponseEntity<>(this.jobAdvertisementService.getJobAdvertisementWithEmpDetails(), HttpStatus.OK);
     }
-*/
+
+
 }

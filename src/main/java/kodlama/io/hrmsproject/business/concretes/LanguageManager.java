@@ -3,16 +3,16 @@ package kodlama.io.hrmsproject.business.concretes;
 import kodlama.io.hrmsproject.business.abstracts.LanguageService;
 import kodlama.io.hrmsproject.core.utilities.result.Result;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessResult;
-import kodlama.io.hrmsproject.dataAccess.abstracts.LanguageDto;
+import kodlama.io.hrmsproject.dataAccess.abstracts.LanguageDao;
 import kodlama.io.hrmsproject.entities.concretes.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LanguageManager implements LanguageService {
-    private LanguageDto languageDto;
+    private LanguageDao languageDto;
     @Autowired
-    public LanguageManager(LanguageDto languageDto) {
+    public LanguageManager(LanguageDao languageDto) {
         this.languageDto = languageDto;
     }
 

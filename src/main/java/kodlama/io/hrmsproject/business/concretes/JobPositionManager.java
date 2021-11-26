@@ -5,7 +5,7 @@ import kodlama.io.hrmsproject.core.utilities.result.DataResult;
 import kodlama.io.hrmsproject.core.utilities.result.Result;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessResult;
-import kodlama.io.hrmsproject.dataAccess.abstracts.JobPositionDto;
+import kodlama.io.hrmsproject.dataAccess.abstracts.JobPositionDao;
 import kodlama.io.hrmsproject.entities.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class JobPositionManager implements JobPositionService {
     @Autowired
-    private JobPositionDto jobPositionDto;
+    private JobPositionDao jobPositionDto;
 
     @Override
     public Result add(JobPosition jobPosition) {

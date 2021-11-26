@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/resume")
@@ -45,6 +46,20 @@ public class ResumesController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
         }
+    }
+    @PutMapping("/saveImage")
+    public ResponseEntity<Result> saveImage(@RequestBody MultipartFile file, @RequestParam int id) {
+        var result = this.resumeService.saveImage(file,id);
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result);
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        }
+
+    }
+    @GetMapping("/getById")
+    public ResponseEntity<Result> getResumeById(@PathVariable("id") int id){
+        return new ResponseEntity<>(this.resumeService.getResumeById(id),HttpStatus.OK );
     }
 
 }

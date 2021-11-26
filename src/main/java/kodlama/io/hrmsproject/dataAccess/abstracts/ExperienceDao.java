@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface ExperienceDto extends JpaRepository<Experience,Integer> {
+public interface ExperienceDao extends JpaRepository<Experience,Integer> {
     List<Experience> getExperienceByWorkStartingDateStartsWith(Date workStartingDate);
 
 

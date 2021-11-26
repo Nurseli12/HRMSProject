@@ -1,21 +1,28 @@
 package kodlama.io.hrmsproject.business.concretes;
 
 import kodlama.io.hrmsproject.business.abstracts.ResumeService;
+import kodlama.io.hrmsproject.core.utilities.result.DataResult;
 import kodlama.io.hrmsproject.core.utilities.result.Result;
+import kodlama.io.hrmsproject.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessResult;
-import kodlama.io.hrmsproject.dataAccess.abstracts.ResumeDto;
+import kodlama.io.hrmsproject.core.utilities.result.fileuploadvalidator.CloudinaryService;
+import kodlama.io.hrmsproject.dataAccess.abstracts.ResumeDao;
 import kodlama.io.hrmsproject.entities.concretes.Resume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class ResumeManager implements ResumeService {
-    private ResumeDto resumeDto;
+    private ResumeDao resumeDto;
+    private CloudinaryService cloudinaryService;
     @Autowired
-    public ResumeManager(ResumeDto resumeDto) {
+    public ResumeManager(ResumeDao resumeDto) {
         this.resumeDto = resumeDto;
+        this.cloudinaryService=cloudinaryService;
     }
 
 
@@ -49,5 +56,20 @@ public class ResumeManager implements ResumeService {
         savedResume.setPhoto(resume.getPhoto());
         this.resumeDto.save(savedResume);
         return new SuccessResult("Resume upadted");
+    }
+
+    @Override
+    public Result saveImage(MultipartFile file, int id) {
+        Map<String, String> uploader = (Map<String, String>) cloudinaryService.save(file).getData();
+        String imageUrl= uploader.get("url");
+        Resume resume = resumeDto.getOne(id);
+        resume.setPhoto(imageUrl);
+        resumeDto.save(resume);
+        return new SuccessResult("Image Saved");
+    }
+
+    @Override
+    public DataResult<Resume> getResumeById(int id) {
+        return new SuccessDataResult<Resume>(this.resumeDto.getResumeById(id));
     }
 }

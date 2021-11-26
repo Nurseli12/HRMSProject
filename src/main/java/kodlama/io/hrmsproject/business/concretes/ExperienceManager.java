@@ -5,7 +5,7 @@ import kodlama.io.hrmsproject.core.utilities.result.DataResult;
 import kodlama.io.hrmsproject.core.utilities.result.Result;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessResult;
-import kodlama.io.hrmsproject.dataAccess.abstracts.ExperienceDto;
+import kodlama.io.hrmsproject.dataAccess.abstracts.ExperienceDao;
 import kodlama.io.hrmsproject.entities.concretes.Experience;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @Service
 public class ExperienceManager implements ExperienceService {
-    private ExperienceDto experienceDto;
+    private ExperienceDao experienceDto;
     @Autowired
-    public ExperienceManager(ExperienceDto experienceDto) {
+    public ExperienceManager(ExperienceDao experienceDto) {
         this.experienceDto = experienceDto;
     }
 

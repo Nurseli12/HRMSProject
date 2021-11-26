@@ -7,6 +7,7 @@ import kodlama.io.hrmsproject.core.utilities.result.SuccessDataResult;
 import kodlama.io.hrmsproject.core.utilities.result.SuccessResult;
 import kodlama.io.hrmsproject.dataAccess.abstracts.JobAdvertisementDao;
 import kodlama.io.hrmsproject.entities.concretes.JobAdvertisement;
+import kodlama.io.hrmsproject.entities.dtos.JobAdvertisementDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +75,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public DataResult<List<JobAdvertisement>> findAllByEmployer_IdAndStatusTrue(int id) {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAllByEmployer_IdAndStatusTrue(id));
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisementDto>> getJobAdvertisementWithEmpDetails() {
+        return new SuccessDataResult<List<JobAdvertisementDto>>(this.jobAdvertisementDao.getJobAdvertisementWithEmpDetails());
     }
 
 /*    @Override

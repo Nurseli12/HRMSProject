@@ -23,8 +23,10 @@ public class ExperiencesController {
     public ExperiencesController(ExperienceService experienceService) {
         this.experienceService = experienceService;
     }
+
+
     @PostMapping("/add")
-    public ResponseEntity<Result> add(@Valid @RequestBody Experience experience){
+    public ResponseEntity<Result> add(@RequestBody Experience experience){
         var result = this.experienceService.add(experience);
         if(result.isSuccess()){
             return  ResponseEntity.ok(result);
